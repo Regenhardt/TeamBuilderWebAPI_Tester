@@ -1,0 +1,81 @@
+﻿<Window x:Class="TeamBuilderWebAPI_Tester.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:jsonViewer="clr-namespace:JsonViewer;assembly=JsonViewer"
+		xmlns:local="clr-namespace:TeamBuilderWebAPI_Tester"
+        mc:Ignorable="d"
+        Title="Teambuilder WebAPI Tester" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance local:ViewModel}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+	        <RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		
+		<!-- Request Header ["token"] -->
+		<Grid Row="0" Margin="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<TextBlock Grid.Column="0" Text="Request.Headers[&quot;token&quot;]:" Padding="2" />
+			<TextBox Grid.Column="1" Text="{Binding Token}" Padding="2" />
+		</Grid>
+
+	    <!-- Request Body -->
+	    <Grid Row="1" Margin="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+		    </Grid.RowDefinitions>
+
+		    <TextBlock Grid.Row="0" Text="Request body" Padding="2" />
+			<TextBox Grid.Row="1" Text="{Binding Request}" Padding="2"/>
+		</Grid>
+
+	    <!-- Verb, URL & Go -->
+	    <Grid Row="2" VerticalAlignment="Center" Margin="1">
+		    <Grid.ColumnDefinitions>
+			    <ColumnDefinition Width="Auto" />
+			    <ColumnDefinition Width="*" />
+			    <ColumnDefinition Width="Auto" />
+		    </Grid.ColumnDefinitions>
+			<!-- Verb -->
+			<ComboBox Grid.Column="0" ItemsSource="{Binding VerbSource}" SelectedValue="{Binding Verb}" Padding="2" MinWidth="50" />
+			<!-- URL -->
+			<TextBox Grid.Column="1" Text="{Binding Uri}" Padding="2" />
+			<!-- Go -->
+			<Button Grid.Column="2" Content="Go" Margin="3" Padding="2" Command="{Binding GoCommand}" />
+		</Grid>
+
+	    <!-- Response Header ["token"] -->
+	    <Grid Row="3" Margin="1">
+		    <Grid.ColumnDefinitions>
+			    <ColumnDefinition Width="Auto" />
+			    <ColumnDefinition Width="*" />
+		    </Grid.ColumnDefinitions>
+
+		    <TextBlock Grid.Column="0" Text="Response.Headers[&quot;token&quot;]" Padding="2" />
+		    <TextBox Grid.Column="1" Text="{Binding ResponseToken}" IsReadOnly="True" Padding="2" />
+		</Grid>
+
+	    <!-- Response Body -->
+	    <Grid Row="4" Margin="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+
+		    <TextBlock Grid.Row="0" Text="Response body" Padding="2" />
+			<jsonViewer:JsonViewer Grid.Row="1" Name="JsonViewer" Content="{Binding ResponseBody}" Padding="2"/>
+		</Grid>
+
+	</Grid>
+</Window>
